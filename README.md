@@ -69,7 +69,7 @@ To run the application, execute:
 
 bash
 
-`python sortanything_opt.py`
+`python sortanything.py`
 
 For Windows: You can also download a compiled executable from the Releases section.
 
