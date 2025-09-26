@@ -50,12 +50,20 @@ A versatile tool designed to help you organize files and folders efficiently.
 GitHub: [Mohsyn](https://github.com/mohsyn)"""
 
 type_map = {
-            'image': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'],
-            'text': ['.txt', '.md', '.py', '.js', '.html', '.css', '.json', '.xml', '.b4a','.b4j','.b4i','.log','.nfo','.java'],
-            'documents': ['.pdf','.doc','.docx','.dot','.ppt','.pptx','.xls','.xlsx','.xlsm','.xlst'],
-            'compressed': ['.zip', '.rar', '.tar', '.gzip', '.iso', '.7z', '.arc', '.lhz'],
-            'video': ['.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv'],
-            'audio': ['.mp3', '.wav', '.flac', '.aac', '.ogg']
+            'image': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.svg'],
+            'text': ['.txt', '.md', '.py', '.js', '.html', '.css', '.json', '.xml', '.b4a','.b4j','.b4i','.log','.nfo','.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go', '.rb', '.php', '.swift', '.kt', '.kts'],
+            'documents': ['.pdf','.doc','.docx','.dot','.ppt','.pptx','.xls','.xlsx','.xlsm','.xlst', '.csv', '.odt', '.ods', '.odp'],
+            'compressed': ['.zip', '.rar', '.tar', '.gzip', '.iso', '.7z', '.arc', '.lhz', '.gz'],
+            'video': ['.mp4', '.avi', '.mov', '.wmv', '.flv', '.mkv', '.webm'],
+            'audio': ['.mp3', '.wav', '.flac', '.aac', '.ogg', '.wma'],
+            'executable': ['.exe', '.msi', '.deb', '.rpm', '.dmg', '.app', '.bat', '.sh', '.cmd', '.com', '.run'],
+            'font': ['.ttf', '.otf', '.woff', '.woff2'],
+            'database': ['.db', '.sqlite', '.sqlite3', '.sql', '.accdb', '.mdb'],
+            'ebook': ['.epub', '.mobi', '.azw', '.azw3'],
+            'virtualization': ['.vdi', '.vmdk', '.ova', '.ovf'],
+            'configuration': ['.ini', '.cfg', '.conf', '.yml', '.yaml', '.toml'],
+            'script': ['.ps1', '.vbs', '.sh', '.bash', '.zsh', '.bat', '.cmd'],
+            'system': ['.dll', '.sys', '.drv',]
         }
 
 
