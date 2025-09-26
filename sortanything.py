@@ -764,7 +764,7 @@ class FileSorterApp:
         scrollbar.pack(side="right", fill="y")
         
         # Output mode selection
-        mode_frame = ttk.Frame(main_frame)
+        mode_frame = ttk.Frame(main_frame, width=50)
         mode_frame.pack(fill=tk.X, pady=10)
         ttk.Label(mode_frame, text="Output Mode:").pack(side=tk.LEFT)
         self.output_mode_var = tk.StringVar(value="list")
@@ -779,12 +779,17 @@ class FileSorterApp:
         
         # Output directory selection (for folder mode)
         self.output_frame = ttk.Frame(main_frame)
-        ttk.Label(self.output_frame, text="Output Directory:").pack(side=tk.LEFT)
+        self.output_label = ttk.Label(self.output_frame, text="Output Directory:")
+        self.output_label.pack(side=tk.LEFT)
         self.output_dir_var = tk.StringVar()
-        ttk.Entry(self.output_frame, textvariable=self.output_dir_var, width=50).pack(side=tk.LEFT, padx=5)
-        btn_browse = ttk.Button(self.output_frame, text="Browse", command=self.browse_output_directory)
-        btn_browse.pack(side=tk.LEFT, padx=2)
-        self._add_tooltip(btn_browse, "Select Output folder where files will be moved (create folders yourself)")
+        self.output_entry = ttk.Entry(self.output_frame, textvariable=self.output_dir_var, width=50)
+        self.output_entry.pack(side=tk.LEFT, padx=5)
+        self.output_browse_btn = ttk.Button(self.output_frame, text="Browse", command=self.browse_output_directory)
+        self.output_browse_btn.pack(side=tk.LEFT, padx=2)
+        self._add_tooltip(self.output_browse_btn, "Select Output folder where files will be moved (create folders yourself)")
+        
+        # Always pack the frame to maintain consistent layout
+        self.output_frame.pack(fill=tk.X, pady=10)
         
         self.update_bucket_config()
         self.add_new_bucket()  # Add second default bucket
@@ -792,6 +797,9 @@ class FileSorterApp:
         # Bottom buttons (keep a handle to ensure order relative to output_frame)
         self.phase2_buttons_frame = ttk.Frame(main_frame)
         self.phase2_buttons_frame.pack(fill=tk.X, padx=5, pady=5)
+        
+        # Set initial state based on output mode
+        self.on_output_mode_change()
         btn_back1 = ttk.Button(self.phase2_buttons_frame, text="Back to selection", command=self.back_to_phase1)
         btn_back1.pack(side=tk.LEFT, padx=2)
         self._add_tooltip(btn_back1, "Return to the previous step to change item selection.")
@@ -1368,18 +1376,16 @@ class FileSorterApp:
         self.output_mode = self.output_mode_var.get()
 
         if self.output_mode_var.get() == "folder":
-            
-            if not self.output_frame.winfo_ismapped():
-                # Ensure output_frame appears above the phase2 buttons
-                try:
-                    self.output_frame.pack_forget()
-                except Exception:
-                    pass
-                self.output_frame.pack(fill=tk.X, pady=10, before=self.phase2_buttons_frame)
+            # Show output directory widgets in folder mode
+            self.output_label.pack(side=tk.LEFT)
+            self.output_entry.pack(side=tk.LEFT, padx=5)
+            self.output_browse_btn.pack(side=tk.LEFT, padx=2)
             self.load_buckets_from_subfolders()
         else:
-            if self.output_frame.winfo_ismapped():
-                self.output_frame.pack_forget()
+            # Hide output directory widgets in list mode but keep frame for consistent layout
+            self.output_label.pack_forget()
+            self.output_entry.pack_forget()
+            self.output_browse_btn.pack_forget()
             self.update_bucket_config()
         # Also immediately toggle Move Files button visibility in Phase 4
         try:
